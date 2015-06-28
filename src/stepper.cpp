@@ -1,4 +1,6 @@
+#include <future>         // std::async, std::future
 #include <wiringPi.h>
+
 
 class stepper {
 
@@ -81,6 +83,20 @@ public:
         }
     }
 
+    template<typename... Args>
+    std::future<void> async_prawo(Args... args) const
+    {
+        // explicitly use std::launch::async to force program use thread
+        return std::async (std::launch::async, &stepper::prawo, this, std::forward<Args>(args)...);
+    }
+
+    template<typename... Args>
+    std::future<void> async_lewo(Args... args) const
+    {
+        // explicitly use std::launch::async to force program use thread
+        return std::async (std::launch::async, &stepper::lewo, this, std::forward<Args>(args)...);
+    }
+
 private:
 
     void setUp() const
@@ -109,14 +125,21 @@ int main()
 
     while (1)
     {
-        step1.lewo(10,60);
+        auto f1 = step1.async_lewo(10,60);
+        auto f2 = step2.async_prawo(10,60);
+
         delay(500);
-        step2.lewo(10,60);
+
+        f1.get();
+        f2.get();
+
+        f1 = step1.async_prawo(10,60);
+        f2 = step2.async_lewo(10,60);
+
         delay(500);
-        step1.prawo(10,60);
-        delay(500);
-        step2.prawo(10,60);
-        delay(500);
+
+        f1.get();
+        f2.get();
     }
 
     return 0;

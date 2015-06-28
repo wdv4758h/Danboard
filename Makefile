@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -Ofast -march=native -pipe -flto
-PI_LIBRARIES = wiringPi
+PI_LIBRARIES = pthread wiringPi
 CV_LIBRARIES = opencv_core opencv_imgproc opencv_objdetect opencv_highgui
 HEADERS = /usr/local/include
 INCLUDES = $(foreach header, $(HEADERS), -I$(header))
