@@ -71,20 +71,20 @@ public:
     }
 
     template<typename... Args>
-    void rturn(Args... args) const
+    void rturn(Args&&... args) const
     {
         turn(std::forward<Args>(args)..., 1);
     }
 
     template<typename... Args>
-    std::future<void> async_turn(Args... args) const
+    std::future<void> async_turn(Args&&... args) const
     {
         // explicitly use std::launch::async to force program use thread
         return std::async (std::launch::async, &stepper::turn, this, std::forward<Args>(args)..., 0);
     }
 
     template<typename... Args>
-    std::future<void> async_rturn(Args... args) const
+    std::future<void> async_rturn(Args&&... args) const
     {
         // explicitly use std::launch::async to force program use thread
         return std::async (std::launch::async, &stepper::rturn<Args...>, this, std::forward<Args>(args)...);
