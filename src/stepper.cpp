@@ -97,7 +97,7 @@ private:
         pinMode(stepper1, OUTPUT);
         pinMode(stepper2, OUTPUT);
         pinMode(stepper3, OUTPUT);
-        pinMode(stepper3, OUTPUT);
+        pinMode(stepper4, OUTPUT);
     }
 
     const unsigned char stepper1 = 15;
