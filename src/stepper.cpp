@@ -118,19 +118,24 @@ int main()
 
     while (1)
     {
-        auto f1 = step1.async_rturn(10,60);
-        auto f2 = step2.async_turn(10,60);
-
-        delay(500);
-
+        auto f1 = step1.async_turn(10,60);
+        auto f2 = step2.async_turn(10,30);
         f1.get();
         f2.get();
 
-        f1 = step1.async_turn(10,60);
         f2 = step2.async_rturn(10,60);
+        f2.get();
 
-        delay(500);
+        f1 = step1.async_rturn(10,120);
+        f2 = step2.async_turn(10,60);
+        f1.get();
+        f2.get();
 
+        f2 = step2.async_rturn(10,60);
+        f2.get();
+
+        f1 = step1.async_turn(10,60);
+        f2 = step2.async_turn(10,30);
         f1.get();
         f2.get();
     }
