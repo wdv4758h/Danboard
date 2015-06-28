@@ -1,4 +1,5 @@
 #include <future>         // std::async, std::future
+#include <iterator>       // std::rbegin, std::rend
 #include <wiringPi.h>
 
 
@@ -33,68 +34,60 @@ public:
         digitalWrite(stepper4, w4);
     }
 
-    void prawo(const unsigned int time, const unsigned int steps) const
+    void turn(const unsigned int time, const unsigned int steps, const bool reverse = 0) const
     {
-        // move right
+        static bool table[][4] = { { 1, 0, 0, 0 },
+                                   { 1, 1, 0, 0 },
+                                   { 0, 1, 0, 0 },
+                                   { 0, 1, 1, 0 },
+                                   { 0, 0, 1, 0 },
+                                   { 0, 0, 1, 1 },
+                                   { 0, 0, 0, 1 },
+                                   { 1, 0, 0, 1 }, };
 
-        for (unsigned int i=0; i <= steps; i++)
+        if (!reverse)
         {
-            setStep(1,0,0,0);
-            delay(time);
-            setStep(1,1,0,0);
-            delay(time);
-            setStep(0,1,0,0);
-            delay(time);
-            setStep(0,1,1,0);
-            delay(time);
-            setStep(0,0,1,0);
-            delay(time);
-            setStep(0,0,1,1);
-            delay(time);
-            setStep(0,0,0,1);
-            delay(time);
-            setStep(1,0,0,1);
-            delay(time);
+            for (unsigned int i = 0; i <= steps; i++)
+            {
+                for (auto& p : table)
+                {
+                    setStep(p[0], p[1], p[2], p[3]);
+                    delay(time);
+                }
+            }
         }
-    }
-
-    void lewo(const unsigned int time, const unsigned int steps) const
-    {
-        // move left
-
-        for (unsigned int i=0; i <= steps; i++)
+        else
         {
-            setStep(0,0,0,1);
-            delay(time);
-            setStep(0,0,1,1);
-            delay(time);
-            setStep(0,0,1,0);
-            delay(time);
-            setStep(0,1,1,0);
-            delay(time);
-            setStep(0,1,0,0);
-            delay(time);
-            setStep(1,1,0,0);
-            delay(time);
-            setStep(1,0,0,0);
-            delay(time);
-            setStep(1,0,0,1);
-            delay(time);
+            for (unsigned int i = 0; i <= steps; i++)
+            {
+                for (auto it = std::rbegin(table); it != std::rend(table); it++)
+                {
+                    const auto& p = *it;
+                    setStep(p[0], p[1], p[2], p[3]);
+                    delay(time);
+                }
+            }
         }
     }
 
     template<typename... Args>
-    std::future<void> async_prawo(Args... args) const
+    void rturn(Args... args) const
     {
-        // explicitly use std::launch::async to force program use thread
-        return std::async (std::launch::async, &stepper::prawo, this, std::forward<Args>(args)...);
+        turn(std::forward<Args>(args)..., 1);
     }
 
     template<typename... Args>
-    std::future<void> async_lewo(Args... args) const
+    std::future<void> async_turn(Args... args) const
     {
         // explicitly use std::launch::async to force program use thread
-        return std::async (std::launch::async, &stepper::lewo, this, std::forward<Args>(args)...);
+        return std::async (std::launch::async, &stepper::turn, this, std::forward<Args>(args)..., 0);
+    }
+
+    template<typename... Args>
+    std::future<void> async_rturn(Args... args) const
+    {
+        // explicitly use std::launch::async to force program use thread
+        return std::async (std::launch::async, &stepper::turn, this, std::forward<Args>(args)..., 1);
     }
 
 private:
@@ -125,16 +118,16 @@ int main()
 
     while (1)
     {
-        auto f1 = step1.async_lewo(10,60);
-        auto f2 = step2.async_prawo(10,60);
+        auto f1 = step1.async_rturn(10,60);
+        auto f2 = step2.async_turn(10,60);
 
         delay(500);
 
         f1.get();
         f2.get();
 
-        f1 = step1.async_prawo(10,60);
-        f2 = step2.async_lewo(10,60);
+        f1 = step1.async_turn(10,60);
+        f2 = step2.async_rturn(10,60);
 
         delay(500);
 
