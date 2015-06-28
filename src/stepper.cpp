@@ -87,7 +87,7 @@ public:
     std::future<void> async_rturn(Args... args) const
     {
         // explicitly use std::launch::async to force program use thread
-        return std::async (std::launch::async, &stepper::turn, this, std::forward<Args>(args)..., 1);
+        return std::async (std::launch::async, &stepper::rturn<Args...>, this, std::forward<Args>(args)...);
     }
 
 private:
