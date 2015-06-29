@@ -82,7 +82,14 @@ like this : ::
 * for C we need to know **8** points' integral value
 * for D we need to know **9** points' integral value
 
-By this method, we can get characteristic difference values (specific regions' value) by simple calculation
+By this method, we can get characteristic difference values (specific regions' value) by simple calculation.
+
+We can use these kind of features to indicate what does the object looks like.
+
+For example, we can calculate `the sum of "." area` minus `the sum of "/" area`,
+then we will get a single value.
+Now we can compare the single value with the threshold.
+If it pass the threshold, we vote it (we guess that's what we want).
 
 
 Creating Integral Image
