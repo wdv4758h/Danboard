@@ -86,7 +86,7 @@ By this method, we can get characteristic difference values (specific regions' v
 
 We can use these kind of features to indicate what does the object looks like.
 
-For example, we can calculate `the sum of "." area` minus `the sum of "/" area`,
+For example, we can calculate ``the sum of "." area`` minus ``the sum of "/" area``,
 then we will get a single value.
 Now we can compare the single value with the threshold.
 If it pass the threshold, we vote it (we guess that's what we want).
