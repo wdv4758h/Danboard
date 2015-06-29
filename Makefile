@@ -8,8 +8,11 @@ PI_LDFLAGS = -s $(foreach library, $(PI_LIBRARIES), -l$(library))
 CV_LDFLAGS = -s $(foreach library, $(CV_LIBRARIES), -l$(library))
 
 danboard: bin
-	$(CXX) $(CXXFLAGS) $(PI_LDFLAGS) src/stepper.cpp -o bin/danboard_stepper
+#	$(CXX) $(CXXFLAGS) $(PI_LDFLAGS) src/stepper.cpp -o bin/danboard_stepper
 	$(CXX) $(CXXFLAGS) $(CV_LDFLAGS) src/detect.cpp -o bin/danboard_detect
+
+test: bin
+	$(CXX) $(CXXFLAGS) $(PI_LDFLAGS) -I src/ test/stepper-8-motion.cpp -o bin/danboard_stepper
 
 bin:
 	mkdir -p bin
