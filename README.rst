@@ -91,6 +91,48 @@ then we will get a single value.
 Now we can compare the single value with the threshold.
 If it pass the threshold, we vote it (we guess that's what we want).
 
+Each subframe is 24x24 pixels, so possible features are 162336.
+
+Here is a example for calculate features (example subframe is 4x4) :
+
+::
+
+    features type : 2x1, 1x2, 3x1, 1x3, 2x2
+
+    2x1 shapes:
+            size: 2x1 => count: 12
+            size: 2x2 => count: 9
+            size: 2x3 => count: 6
+            size: 2x4 => count: 3
+            size: 4x1 => count: 4
+            size: 4x2 => count: 3
+            size: 4x3 => count: 2
+            size: 4x4 => count: 1
+    1x2 shapes:
+            size: 1x2 => count: 12             +-----------------------+
+            size: 1x4 => count: 4              |     |     |     |     |
+            size: 2x2 => count: 9              |     |     |     |     |
+            size: 2x4 => count: 3              +-----+-----+-----+-----+
+            size: 3x2 => count: 6              |     |     |     |     |
+            size: 3x4 => count: 2              |     |     |     |     |
+            size: 4x2 => count: 3              +-----+-----+-----+-----+
+            size: 4x4 => count: 1              |     |     |     |     |
+    3x1 shapes:                                |     |     |     |     |
+            size: 3x1 => count: 8              +-----+-----+-----+-----+
+            size: 3x2 => count: 6              |     |     |     |     |
+            size: 3x3 => count: 4              |     |     |     |     |
+            size: 3x4 => count: 2              +-----------------------+
+    1x3 shapes:
+            size: 1x3 => count: 8                  Total Count = 136
+            size: 2x3 => count: 6
+            size: 3x3 => count: 4
+            size: 4x3 => count: 2
+    2x2 shapes:
+            size: 2x2 => count: 9
+            size: 2x4 => count: 3
+            size: 4x2 => count: 3
+            size: 4x4 => count: 1
+
 
 Creating Integral Image
 ------------------------------
@@ -237,4 +279,6 @@ Reference
 * `Wikipedia - Haar-like features <https://en.wikipedia.org/wiki/Haar-like_features>`_
 * `Wikipedia - AdaBoost <https://en.wikipedia.org/wiki/AdaBoost>`_
 * `scikit-learn - AdaBoost <http://scikit-learn.org/stable/modules/ensemble.html#adaboost>`_
-* `Robust Real-time Object Detection (2001) <http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.110.4868>`_
+* `Robust Real-time Object Detection <http://lear.inrialpes.fr/people/triggs/student/vj/viola-ijcv04.pdf>`_
+* `StackOverflow - Viola-Jones' face detection claims 180k features <http://stackoverflow.com/questions/1707620/viola-jones-face-detection-claims-180k-features>`_
+* `OpenCV Face Detection: Visualized <https://vimeo.com/12774628>`_
