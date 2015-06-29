@@ -77,8 +77,8 @@ member function
 
 * turn : turn the stepper
 * rturn : turn the stepper (reverse)
-* async_turn : asynchronously turn the stepper, it will return a future object, you can call ``.get()`` to wait the result
-* async_rturn : asynchronously turn the stepper (reverse), it will return a future object, you can call ``.get()`` to wait the result
+* async_turn : asynchronously turn the stepper, it will return a future object, you can call ``.get()`` to wait for the result
+* async_rturn : asynchronously turn the stepper (reverse), it will return a future object, you can call ``.get()`` to wait for the result
 
 
 detector
