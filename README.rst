@@ -59,6 +59,42 @@ Body :
 STL files are in the ``stl`` folder.
 
 
+API
+==================================================
+
+stepper
+------------------------------
+
+``stepper`` class is in the ``src/stepper.h``, it can control your stepper by giving data to ULN2003.
+
+It talks to GPIO by WiringPi library.
+
+Please pass in the pin number (in WiringPi) to construct the class instance : ``stepper(PIN1, PIN2, PIN3, PIN4)``
+
+
+member function
+++++++++++++++++++++
+
+* turn : turn the stepper
+* rturn : turn the stepper (reverse)
+* async_turn : asynchronously turn the stepper, it will return a future object, you can call ``.get()`` to wait the result
+* async_rturn : asynchronously turn the stepper (reverse), it will return a future object, you can call ``.get()`` to wait the result
+
+
+detector
+------------------------------
+
+Please pass in the model name to construct the class instance : ``detector("haarcascade_frontalface_alt.xml")``
+
+It will open the camera just like what OpenCV does in ``VideoCapture``.
+
+
+member function
+++++++++++++++++++++
+
+* detect : return a vector of detected rectangle (feature)
+
+
 Algorithm - Viola–Jones object detection framework
 ==================================================
 
