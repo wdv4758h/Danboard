@@ -48,6 +48,42 @@ sums up the pixel intensities in each region and calculates the difference betwe
 
 The advantage of using Haar features is the **fast calculation speed**.
 
+A Haar feature is a rectangular region in the integral image,
+so you will need to know the position of the starting and ending point.
+
+like this : ::
+
+    +-----------------+         +-----------------+
+    |                 |         |       +-------+ |
+    |  +---+---+      |         |       |///////| |
+    |  |...|///|      |         |       +-------+ |
+    |  |...|///|      |         |       |.......| |
+    |  |...|///|      |         |       +-------+ |
+    |  |...|///|      |         |      B          |
+    |  +---+---+      |         |                 |
+    |           A     |         |                 |
+    +-----------------+         +-----------------+
+
+
+
+    +-----------------+         +-----------------+
+    |                 |         |      +---+---+  |
+    |                 |         |      |///|...|  |
+    |                 |         |      |///|...|  |
+    | C               |         |      +---+---+  |
+    |  +---+---+---+  |         |      |...|///|  |
+    |  |...|///|...|  |         |      |...|///|  |
+    |  |...|///|...|  |         |      +---+---+  |
+    |  +---+---+---+  |         |     D           |
+    +-----------------+         +-----------------+
+
+* for A we need to know **6** points' integral value
+* for B we need to know **6** points' integral value
+* for C we need to know **8** points' integral value
+* for D we need to know **9** points' integral value
+
+By this method, we can get characteristic difference values (specific regions' value) by simple calculation
+
 
 Creating Integral Image
 ------------------------------
@@ -132,9 +168,11 @@ calculation : ::
 Adaboost Training algorithm
 ------------------------------
 
-**AdaBoost** is a machine learning algorithm which can collaborate with many other types of learning algorithms to improve their performance.
+**AdaBoost** was introduced in 1995 by Freund and Schapire, it's a machine learning algorithm which can collaborate with many other types of learning algorithms to improve their performance.
 
 The concept is to combine some **weak classifier** into a weighted sum to make a **strong classifier**.
+
+AdaBoost use weighted majority vote (or sum) to produce the final prediction.
 
 
 Cascaded Classifiers
@@ -155,3 +193,5 @@ Reference
 * `Wikipedia - Viola–Jones object detection framework <https://en.wikipedia.org/wiki/Viola%E2%80%93Jones_object_detection_framework>`_
 * `Wikipedia - Haar-like features <https://en.wikipedia.org/wiki/Haar-like_features>`_
 * `Wikipedia - AdaBoost <https://en.wikipedia.org/wiki/AdaBoost>`_
+* `scikit-learn - AdaBoost <http://scikit-learn.org/stable/modules/ensemble.html#adaboost>`_
+* `Robust Real-time Object Detection (2001) <http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.110.4868>`_
