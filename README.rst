@@ -37,6 +37,28 @@ Testing Environment
 +----------+-------------------------+
 
 
+3D Printing Structure Inside The Body
+========================================
+
+Head :
+
+.. image:: img/danboard-head-v2.2.png
+    :alt: Head
+
+Neck :
+
+.. image:: img/danboard-neck-v2.png
+    :alt: Neck
+
+Body :
+
+.. image:: img/danboard-body-v1.png
+    :alt: Body
+
+
+STL files are in the ``stl`` folder.
+
+
 Algorithm - Viola–Jones object detection framework
 ==================================================
 
