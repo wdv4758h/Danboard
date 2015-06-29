@@ -14,6 +14,7 @@ danboard: bin
 test: bin
 	$(CXX) $(CXXFLAGS) $(PI_LDFLAGS) -I src/ test/stepper-8-motion.cpp -o bin/stepper-8-motion
 	$(CXX) $(CXXFLAGS) $(CV_LDFLAGS) -I src/ test/face_detection.cpp -o bin/face_detection
+	$(CXX) $(CXXFLAGS) $(PI_LDFLAGS) $(CV_LDFLAGS) -I src/ test/detect-and-move.cpp -o bin/detect-and-move
 
 bin:
 	mkdir -p bin
