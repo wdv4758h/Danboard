@@ -12,7 +12,7 @@ danboard: bin
 	$(CXX) $(CXXFLAGS) $(CV_LDFLAGS) src/detect.cpp -o bin/danboard_detect
 
 test: bin
-	$(CXX) $(CXXFLAGS) $(PI_LDFLAGS) -I src/ test/stepper-8-motion.cpp -o bin/danboard_stepper
+	$(CXX) $(CXXFLAGS) $(PI_LDFLAGS) -I src/ test/stepper-8-motion.cpp -o bin/stepper-8-motion
 
 bin:
 	mkdir -p bin
