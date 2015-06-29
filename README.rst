@@ -10,7 +10,7 @@ What's Danboard ?
 
 `image source <https://www.flickr.com/photos/meaganmakes/14189116565/>`_
 
-license
+license of above image
 
 .. image:: img/cc-by-nc.png
     :alt: CC BY-NC
@@ -26,6 +26,15 @@ we use Raspberry Pi 2 + Raspberry Pi Camera Module + ULN2003 + Stepper Motor
 
 use camera to get image of current scene, then detect the faces, control stepper to turn Danbo's face
 
+
+Testing Environment
+========================================
+
++----------+-------------------------+
+| Hardware | Raspberry Pi 2 (mode B) |
++----------+-------------------------+
+| OS       | Arch Linux ARM          |
++----------+-------------------------+
 
 
 Algorithm - Viola–Jones object detection framework
@@ -265,7 +274,7 @@ Cascaded Classifiers
 
 
 
-License
+License of this project
 ========================================
 
 `GPL v3 <LICENSE>`_
