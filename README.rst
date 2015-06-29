@@ -82,7 +82,7 @@ like this : ::
 * for C we need to know **8** points' integral value
 * for D we need to know **9** points' integral value
 
-By this method, we can get characteristic difference values (specific regions' value) by simple calculation.
+By this method, we can get **characteristic difference values** (specific regions' value) by simple calculation.
 
 We can use these kind of features to indicate what does the object looks like.
 
@@ -182,8 +182,25 @@ The concept is to combine some **weak classifier** into a weighted sum to make a
 AdaBoost use weighted majority vote (or sum) to produce the final prediction.
 
 
+Assume we have N training images (positive and negative),
+we lable them with 1 or -1 (1, if the image is what we want, otherwise -1).
+
+
 Cascaded Classifiers
 ------------------------------
+
+* 1st layer, A simple **2-feature classifier** can achieve **almost 100% detection rate** with **50% false positive rate**.
+    - if it's what we want, it will pass (almost 100% detection rate)
+    - if it's not what we want, it will have 50% probability to pass
+    - this can fast filter the data
+* 2nd layer, 10 features, less false positive rate P%
+    - if it's what we want, it will pass (almost 100% detection rate)
+    - if it's not what we want, it will have P% probability to pass
+    - now the overall false positive rate is (50% * P%)
+* 3rd layer, X features, less false positive rate Q%
+    - if it's what we want, it will pass (almost 100% detection rate)
+    - if it's not what we want, it will have Q% probability to pass
+    - now the overall false positive rate is (50% * P% * Q%)
 
 
 
