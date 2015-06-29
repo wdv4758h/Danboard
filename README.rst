@@ -37,6 +37,14 @@ Testing Environment
 +----------+-------------------------+
 
 
+Dependency
+========================================
+
+* OpenCV 2.4
+* WiringPi
+* C++ Compiler which support C++14
+
+
 3D Printing Structure Inside The Body
 ========================================
 
@@ -293,6 +301,13 @@ AdaBoost use weighted majority vote (or sum) to produce the final prediction.
 
 Assume we have N training images (positive and negative),
 we lable them with 1 or -1 (1, if the image is what we want, otherwise -1).
+
+We iterate through the features (16K) to find out best N Haar features,
+then we start training with these N features.
+We give a weighting variable to every features (N features) to tune the result.
+Now we start voting. By changing the weighting variable, we can minimize the error of the voting result.
+
+Finally, we get a better result. Now we can output the model to an xml for using next time.
 
 
 Cascaded Classifiers
